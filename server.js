@@ -16,12 +16,9 @@ app.use(session({
     cookie: { maxAge: 60000},
 }))
 
-var random = Math.floor((Math.random()* 100));
-
 app.get('/', function(req, res){
     req.session['name'] = 'max';
-    req.session['rando'] = random;
-    console.log(req.session.rando);
+    req.session['rando'] = Math.floor((Math.random()* 100));
     res.render('index', {panther: req.session['rando']});
 })
 
@@ -45,24 +42,21 @@ app.post('/process', function(req, res){
 })
 
 app.get('/high', function(req, res){
-    req.session['name'] = 'max';
-    req.session['rando'] = random;
-    console.log(req.session.rando);
     res.render('high', {panther: req.session['rando']});
 })
 
 app.get('/low', function(req, res){
-    req.session['name'] = 'max';
-    req.session['rando'] = random;
-    console.log(req.session.rando);
     res.render('low', {panther: req.session['rando']});
 })
 
 app.get('/win', function(req, res){
-    req.session['name'] = 'max';
-    req.session['rando'] = random;
-    console.log(req.session.rando);
     res.render('win', {panther: req.session['rando']});
+})
+
+app.get('/reset', function(req, res){
+    // req.session.destroy();
+    //changes
+    res.redirect('/');
 })
 
 
